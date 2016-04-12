@@ -100,10 +100,9 @@ def jaccard(h1,h2):
 def near_duplicates(seed,lshdict,doc2lsh,t):
     cluster=set([seed])
     #get candidates and flatten list
-    candidates=set(itertools.chain.from_iterable([lshdict[sig] for sig in doc2lsh[seed]]))
+    candidates=set(itertools.chain.from_iterable((lshdict[sig] for sig in doc2lsh[seed])))
     m1=hashcorp[seed]
     for cand in candidates:
-        if cand in cluster:continue#don't check if we've already added this
         m2=hashcorp[cand]
         if jaccard(m2,m1) >=t:
             cluster.add(cand)
