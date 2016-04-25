@@ -248,8 +248,8 @@ def create_signatures(corpus):
     """
     for key, doc in corpus:
         #compute minhash signature
-        hashvalues=np.empty(NUM_PERM,dtype=np.int64)
-        hashvalues = MAX_HASH
+        hashvalues=np.ones(NUM_PERM,dtype=np.int64)
+        hashvalues=hashvalues*MAX_HASH
         for token in doc:
             #np.minimum(get_permuted_hashes(token.encode('utf-8','ignore')), hashvalues)
             hashvalues = np.minimum(get_permuted_hashes(token), hashvalues)
@@ -354,9 +354,8 @@ if __name__ == "__main__":
     #compute hashes
         for key, doc in mycorpus:
             #compute minhash signature
-            hashvalues=np.empty(NUM_PERM,dtype=np.int64)
-            #hashvalues.fill(MAX_HASH)
-            hashvalues = MAX_HASH
+            hashvalues=np.ones(NUM_PERM,dtype=np.int64)
+            hashvalues=hashvalues*MAX_HASH
             for token in doc:
                 #np.minimum(get_permuted_hashes(token.encode('utf-8','ignore')), hashvalues)
                 np.minimum(get_permuted_hashes(token), hashvalues)
